@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "5968dd23fc13ae04d9000001"
+  },
+  "product_name": "Big data book",
+  "supplier": "Amazon",
+  "quantity": 261,
+  "unit_cost": "$10.47"
+}, {
+  "_id": {
+    "$oid": "5968dd23fc13ae04d9000002"
+  },
+  "product_name": "Mountain Juniperus ashei",
+  "supplier": "Keebler-Hilpert",
+  "quantity": 292,
+  "unit_cost": "$8.74"
+}, {
+  "_id": {
+    "$oid": "5968dd23fc13ae04d9000003"
+  },
+  "product_name": "USB Type C",
+  "supplier": "Apple",
+  "quantity": 211,
+  "unit_cost": "$20.53"
+}]
