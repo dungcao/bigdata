@@ -1,0 +1,21 @@
+db.products.insertOne({"product_name" : "Mac book pro 2018", "supplier" : "Apple", "quantity" : 260, "unit_cost" : "$1299"})
+
+db.products.find({product_name: /^Mac/})
+
+db.products.find({ $or: [ {quantity: {$gt: 250}}, {product_name: /^Mac/}] })
+
+db.products.findAndModify({ query: {quantity: {$gt: 150}}, update: { $inc: {quantity: -200} } })
+
+db.products.findAndModify({ query: {quantity: {$lt: 150}}, update: { $set: {quantity: 200} } })
+
+db.products.update({ $or: [{product_name: /^Mac/}, {product_name: /^U/}]}, { $set: {quantity: 250} }, {multi: true})
+
+db.products.remove({ quantity: {$eq: 200}})
+
+db.products.aggregate( { $group: { _id: "$supplier", total: { $sum: "$quantity" } } })
+
+db.products.aggregate([ { $match: {supplier: /^A/}}, { $group: { _id: "$supplier", total: { $sum: "$quantity" } } }])
+
+db.products.mapReduce( function() {emit(this.supplier, this.quantity); },
+					function(key, value) {return Array.avg(value)},
+					{out: "avg_quantity_by_supplier"}).find()
