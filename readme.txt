@@ -3,14 +3,14 @@
 3. pip3 install findspark
 
 Before run +++++++
-export SPARK_HOME=/Soft/spark-2.4.3-bin-hadoop2.7/
+export SPARK_HOME=/Users/Storage/Soft/spark-3.0.1-bin-hadoop3.2
 export PATH=$SPARK_HOME/bin:$PATH
 export PYSPARK_PYTHON=python3
 
 jupyter notebook
 
 
-export PATH=/Soft/scala-2.13.0/bin:$PATH
+export PATH=/Users/Storage/Soft/scala-2.12.12/bin:$PATH
 
 Start Spark Shell
 + use Scala:  spark-shell
@@ -19,8 +19,10 @@ Start Spark Shell
 Start MongoDB
 cd /Users/dungcao/Downloads/mongodb-osx-x86_64-4.0.10/bin (or add to path)
 ---- sudo to create /data/db folder if not exist
-./mongod --dbpath /MongodbData
+./mongod --dbpath /Users/Storage/MongodbData
 
+
+DATA: http://api.nobelprize.org/v1/laureate.json
 
 Stop MongoDB
 ++ from mongo shell
@@ -33,8 +35,12 @@ ps -ef | grep mongo
 kill xxx
 
 ++++===================
+Hadoop
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html
+
+++++===================
 Start Spark standardlone
-cd /Soft/spark-2.4.3-bin-hadoop2.7/
+cd /Users/Storage/Soft/spark-3.0.1-bin-hadoop3.2
 ./sbin/start-all.sh
 
 run a python spark
@@ -62,3 +68,23 @@ create topic --- bin/kafka-topics.sh --create --zookeeper localhost:2181 --repli
 start producer to send message to kafka server ---- bin/kafka-console-producer.sh --broker-list localhost:9092 --topic topic_bigdata
 
 consume message --- bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic_bigdata --from-beginning
+
+++++=====================
+HIVE:
+install: https://www.tutorialspoint.com/hive/hive_installation.htm
+
+export HADOOP_HOME=/Users/Storage/Soft/hadoop-3.2.1
+export HIVE_HOME=/Users/Storage/Soft/apache-hive-3.1.2-bin
+export DERBY_HOME=/Users/Storage/Soft/db-derby-10.14.2.0-bin
+
+init metastore: (in bin) schematool -initSchema -dbType derby
+
+start Hadoop then
+hadoop fs -mkdir  /tmp
+hadoop fs -mkdir /user/hive/warehouse   # step by step mkdir 
+hadoop fs -chmod g+w   /tmp
+hadoop fs -chmod g+w   /user/hive/warehouse
+
+replace guava.xxx in lib of HIVE by guava-jre.xxx in hadoop/share/hdfs/lib
+
+start hive in bin
