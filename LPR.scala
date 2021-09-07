@@ -57,7 +57,7 @@ object LPR {
       .filter("messageid is not null")
       .groupBy(
         $"license").agg(
-              first("messageid").as('msgid'),
+              first("messageid").as("msgid"),
               first("timestamp").as("timestamp"),
               first("place").as("place"),
               first("sensor").as("sensor"),
