@@ -1,0 +1,14 @@
+CREATE TABLE tbl_epls (name STRING, club STRING, age INT, position STRING, market_value FLOAT, nationality STRING)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;
+    
+CREATE TABLE tbl_employees (name MAP<STRING, STRING>, 
+						email STRING,
+						phone STRING, 
+						address STRUCT<add:STRING, dict:STRING, city:STRING>)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ';'
+    COLLECTION ITEMS TERMINATED BY ':'
+    MAP KEYS TERMINATED BY '#'
+    STORED AS TEXTFILE;
+    
+LOAD DATA LOCAL INPATH '/Users/Storage/Vicohub/BigData/complex_data_hive.csv' OVERWRITE INTO TABLE tbl_employees;
