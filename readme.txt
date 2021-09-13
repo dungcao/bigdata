@@ -70,12 +70,23 @@ start producer to send message to kafka server ---- bin/kafka-console-producer.s
 consume message --- bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic_bigdata --from-beginning
 
 ++++=====================
+++++=====================
 HIVE:
 install: https://www.tutorialspoint.com/hive/hive_installation.htm
+
+config HIVE - DERBY
+https://cwiki.apache.org/confluence/display/hive/hivederbyservermode
+
+replace guava.xxx in lib of HIVE by guava-jre.xxx in hadoop/share/hdfs/lib
+
 
 export HADOOP_HOME=/Users/Storage/Soft/hadoop-3.2.1
 export HIVE_HOME=/Users/Storage/Soft/apache-hive-3.1.2-bin
 export DERBY_HOME=/Users/Storage/Soft/db-derby-10.14.2.0-bin
+
+in derby bin: startNetworkServer
+
+in Hive/bin: run hive --service metastore
 
 init metastore: (in bin) schematool -initSchema -dbType derby
 
@@ -88,3 +99,7 @@ hadoop fs -chmod g+w   /user/hive/warehouse
 replace guava.xxx in lib of HIVE by guava-jre.xxx in hadoop/share/hdfs/lib
 
 start hive in bin
+
+
+FOR HIVE PYTHON
+sudo apt-get install libsasl2-dev sasl thrift thrift-sasl PyHive
