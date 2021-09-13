@@ -1,4 +1,8 @@
-CREATE TABLE tbl_epls (name STRING, club STRING, age INT, position STRING, market_value FLOAT, nationality STRING)
+CREATE TABLE tbl_epls (name STRING, 
+			club STRING, age INT, 
+			position STRING, 
+			market_value FLOAT, 
+			nationality STRING)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     STORED AS TEXTFILE;
     
@@ -11,4 +15,8 @@ CREATE TABLE tbl_employees (name MAP<STRING, STRING>,
     MAP KEYS TERMINATED BY '#'
     STORED AS TEXTFILE;
     
-LOAD DATA LOCAL INPATH '/Users/Storage/Vicohub/BigData/complex_data_hive.csv' OVERWRITE INTO TABLE tbl_employees;
+# OVERWRITE IF NEEDED
+LOAD DATA LOCAL INPATH '/home/ubuntu/data/complex_data_hive.csv' OVERWRITE INTO TABLE tbl_employees;
+
+#APPEND TO TABLE
+LOAD DATA LOCAL INPATH '/home/ubuntu/data/complex-hive-data2.csv' INTO TABLE tbl_employees;
